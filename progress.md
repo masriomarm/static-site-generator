@@ -1,4 +1,5 @@
 # `CH1-L1`
+
 Build a Static Site Generator
 
 Let's build a static site generator from scratch!
