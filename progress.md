@@ -1,3 +1,66 @@
+# `CH1-L3`
+
+CSS
+
+CSS (Cascading Style Sheets) is another "not-really-a-programming-language" that styles HTML elements. It's a way to dress up your HTML with colors, fonts, responsive layouts, animations, etc.
+
+/* Make all <h1> HTML elements red */
+h1 {
+  color: red;
+}
+
+Or maybe we want the max-width of our paragraphs to be 50% of the screen width:
+
+/* Make all <p> HTML elements 50% of the screen width */
+p {
+  max-width: 50%;
+}
+
+Assignment
+
+    Copy and paste the following CSS into a file called styles.css in the public directory:
+
+``` css
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #1f1f23;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+h1 {
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+p {
+  color: #999999;
+  margin-bottom: 20px;
+}
+a {
+  color: #6568ff;
+}
+```
+
+    Link the styles.css file in your index.html file by adding a <link> tag to the <head> section:
+
+``` HTML
+<head>
+  <title>Why Frontend Development Sucks</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+```
+
+You can kill your server with Ctrl+C and restart it:
+
+from inside the public directory
+`python3 -m http.server 8888`
+
+Run and submit the CLI tests with the server running.
+Tip
+
+If you suspect that you're having caching issues, try clearing your browser cache and reloading the page.
+
 # `CH1-L2`
 
 HTML
