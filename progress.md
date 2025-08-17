@@ -1,3 +1,58 @@
+# `CH1-L2`
+
+HTML
+
+The primary output of a static site generator is HTML (HyperText Markup Language), because HTML contains all the content of a web page.
+
+HTML is a simple language for structuring content. It's not a "programming" language in the sense that it doesn't have variables, loops, or conditionals.
+
+HTML is a way to format text, images, links, and other media so that a web browser can render it in a GUI. Here's a simple HTML file:
+
+<html>
+  <head>
+    <title>Why Frontend Development Sucks</title>
+  </head>
+  <body>
+    <h1>Front-end Development is the Worst</h1>
+    <p>
+      Look, front-end development is for script kiddies and soydevs who can't
+      handle the real programming. I mean, it's just a bunch of divs and spans,
+      right? And css??? It's like, "Oh, I want this to be red, but not thaaaaat
+      red." What a joke.
+    </p>
+    <p>
+      Real programmers code, not silly markup languages. They code on Arch
+      Linux, not macOS, and certainly not Windows. They use Vim, not VS Code.
+      They use C, not HTML. Come to the
+      <a href="https://www.boot.dev">backend</a>, where the real programming
+      happens.
+    </p>
+  </body>
+</html>
+
+HTML is a tree-like structure where each "tag" (e.g. <p>, the bits enclosed in angle brackets) can contain other tags, and the whole thing is enclosed in an outermost <html> tag. Let's break down the structure of this HTML file:
+
+    <html> is the root element of the document.
+    <head> contains metadata about the document. Anything in the <head> is not rendered visibly in the browser window.
+        <title> is the title of the document, which is displayed in the browser tab.
+    <body> contains the content of the document, which is what is rendered in the browser window.
+        <h1> is a top-level heading.
+        <p> is a paragraph of text.
+        <a> is a hyperlink. The href attribute is the URL the link points to. Attributes are key-value pairs that provide additional information about an element, like href="https://www.boot.dev".
+
+Assignment
+
+    Create a new repo on GitHub and clone it in your workspace. This is the root of your project.
+    Add a directory to your project called public and save the HTML above into a file called index.html in the public directory.
+    Change directories to the public directory and use Python's built-in HTTP server to serve the contents of the public directory:
+
+cd public
+python3 -m http.server 8888
+
+    Open your browser and paste in the URL of your server, (http://localhost:8888 if you used port 8888 as suggested) into the address bar. You should see your file rendered as a web page! While the server is running, open a new terminal window.
+
+Run and submit the CLI tests using the Boot.dev CLI tool.
+
 # `CH1-L1`
 
 Build a Static Site Generator
