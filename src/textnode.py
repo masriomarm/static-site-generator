@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class TextNodeVariant(Enum):
+class TextType(Enum):
     TEXT = "plain"
     BOLD = "bold"
     ITALIC = "italic"
@@ -11,7 +11,7 @@ class TextNodeVariant(Enum):
 
 
 class TextNode:
-    def __init__(self, text: str, text_type: TextNodeVariant, url: str):
+    def __init__(self, text: str, text_type: TextType, url: str = ""):
         self.text = text
         self.text_type = text_type
         self.url = url
