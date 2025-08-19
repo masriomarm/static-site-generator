@@ -6,8 +6,8 @@ class TextType(Enum):
     BOLD = "bold"
     ITALIC = "italic"
     CODE = "code"
-    LINKS = "link"
-    IMAGES = "image"
+    LINK = "link"
+    IMAGE = "image"
 
 
 class TextNode:
