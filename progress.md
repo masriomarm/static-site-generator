@@ -1,3 +1,37 @@
+# `CH2-L6`
+
+`TextNode` to `HTMLNode`
+
+We need a way to convert a `TextNode` to an `HTMLNode`, specifically a `LeafNode`.
+Assignment
+
+    Write a function:
+
+```
+def text_node_to_html_node(text_node):
+```
+
+It should handle each type of the `TextType` enum. If it gets a `TextNode` that is none of those types, it should raise an exception. Otherwise, it should return a new `LeafNode` object.
+
+    TextType.TEXT: This should return a LeafNode with no tag, just a raw text value.
+    TextType.BOLD: This should return a LeafNode with a "b" tag and the text
+    TextType.ITALIC: "i" tag, text
+    TextType.CODE: "code" tag, text
+    TextType.LINK: "a" tag, anchor text, and "href" prop
+    TextType.IMAGE: "img" tag, empty string value, "src" and "alt" props ("src" is the image URL, "alt" is the alt text)
+
+    Add some tests. Here's one to get you started:
+
+```
+def test_text(self):
+    node = TextNode("This is a text node", TextType.TEXT)
+    html_node = text_node_to_html_node(node)
+    self.assertEqual(html_node.tag, None)
+    self.assertEqual(html_node.value, "This is a text node")
+```
+
+Run and submit the CLI tests from the root of the project.
+
 # `CH2-L5`
 
 `ParentNode`
