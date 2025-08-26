@@ -12,11 +12,11 @@ class HTMLNode:
 
     def props_to_html(self):
         # raise Exception(NotImplemented, "Todo")
-        ret = []
-        for k, v in self.props.items():
-            temp = f' {k}="{v}"'  # Notice the leading space character
-            ret.append(temp)
-        return str.join("", ret)
+        ret = ""
+        if self.props:
+            for k, v in self.props.items():
+                ret += f' {k}="{v}"'  # Notice the leading space character
+        return ret
 
     def __repr__(self):
         ret = f"""
@@ -33,21 +33,12 @@ class LeafNode(HTMLNode):
         super().__init__(tag, value, None, props)
 
     def to_html(self):
-        comp_tag_beg = ""
-        comp_tag_end = ""
-        comp_props = ""
+        if self.value is None:
+            raise ValueError("invalid HTML: no value")
+
+        ret = self.value
         if self.tag:
-            comp_tag_beg = f"<{self.tag}"
-            comp_tag_end = f"</{self.tag}>"
-        if self.props:
-            comp_props = self.props_to_html()
-            comp_props += ">"
-        else:
-            if self.tag:
-                comp_tag_beg += ">"
-
-        ret = f"{comp_tag_beg}{comp_props}{self.value}{comp_tag_end}"
-
+            ret = f"<{self.tag}{self.props_to_html()}>{self.value}</{self.tag}>"
         return ret
 
 
@@ -63,8 +54,7 @@ class ParentNode(HTMLNode):
 
         ret = f"<{self.tag}>"
         for child in self.children:
-            temp = child.to_html()
-            ret += temp
+            ret += child.to_html()
         ret += f"</{self.tag}>"
 
         return ret
