@@ -65,6 +65,24 @@ class Testutils(unittest.TestCase):
         with self.assertRaises(ValueError):
             ut.split_nodes_delimiter([node], "_", tn.TextType.CODE)
 
+    def test_extract_markdown_images(self):
+        text = "This is text with a ![rick roll](https://i.imgur.com/aKaOqIh.gif) and ![obi wan](https://i.imgur.com/fJRm4Vk.jpeg)"
+        ret = ut.extract_markdown_images(text)
+        expected = [
+            ("rick roll", "https://i.imgur.com/aKaOqIh.gif"),
+            ("obi wan", "https://i.imgur.com/fJRm4Vk.jpeg"),
+        ]
+        self.assertEqual(ret, expected)
+
+    def test_extract_markdown_links(self):
+        text = "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)"
+        ret = ut.extract_markdown_links(text)
+        expected = [
+            ("to boot dev", "https://www.boot.dev"),
+            ("to youtube", "https://www.youtube.com/@bootdotdev"),
+        ]
+        self.assertEqual(ret, expected)
+
 
 if __name__ == "__main__":
     unittest.main()
