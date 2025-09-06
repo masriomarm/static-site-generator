@@ -54,3 +54,51 @@ def extract_markdown_links(text):
     # that extracts markdown links instead of images. It should return tuples of anchor text and URLs
     pattern = r"(?<!!)\[([^\[\]]*)\]\(([^\(\)]*)\)"
     return re.findall(pattern, text)
+
+
+def split_nodes_image(old_nodes):
+    delimiter = r"(!\[[^\[\]]*\]\([^\(\)]*\))"
+    ret = []
+    for node in old_nodes:
+        receieved = node.text
+        splits = re.split(delimiter, receieved)
+        splits.pop()
+        found = re.findall(delimiter, receieved)
+        for s in splits:
+            node = None
+            if s in found:
+                # split text and link parts.
+                alt_text = r"!\[([^\[\]]*)\]"
+                found_text = re.findall(alt_text, s)[0]
+                link = r"\(([^\(\)]*)\)"
+                found_link = re.findall(link, s)[0]
+                node = tn.TextNode(found_text, tn.TextType.IMAGE, found_link)
+            else:
+                node = tn.TextNode(s, tn.TextType.TEXT)
+            ret.append(node)
+
+    return ret
+
+
+def split_nodes_link(old_nodes):
+    delimiter = r"(\[[^\[\]]*\]\([^\(\)]*\))"
+    ret = []
+    for node in old_nodes:
+        receieved = node.text
+        splits = re.split(delimiter, receieved)
+        splits.pop()
+        found = re.findall(delimiter, receieved)
+        for s in splits:
+            node = None
+            if s in found:
+                # split text and link parts.
+                text = r"\[([^\[\]]*)\]"
+                found_text = re.findall(text, s)[0]
+                link = r"\(([^\(\)]*)\)"
+                found_link = re.findall(link, s)[0]
+                node = tn.TextNode(found_text, tn.TextType.LINK, found_link)
+            else:
+                node = tn.TextNode(s, tn.TextType.TEXT)
+            ret.append(node)
+
+    return ret

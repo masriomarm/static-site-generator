@@ -83,6 +83,38 @@ class Testutils(unittest.TestCase):
         ]
         self.assertEqual(ret, expected)
 
+    def test_split_images(self):
+        node = tn.TextNode(
+            "This is text with an ![image](https://i.imgur.com/zjjcJKZ.png) and another ![second image](https://i.imgur.com/3elNhQu.png)",
+            tn.TextType.TEXT,
+        )
+        new_nodes = ut.split_nodes_image([node])
+        expected = [
+            tn.TextNode("This is text with an ", tn.TextType.TEXT),
+            tn.TextNode("image", tn.TextType.IMAGE, "https://i.imgur.com/zjjcJKZ.png"),
+            tn.TextNode(" and another ", tn.TextType.TEXT),
+            tn.TextNode(
+                "second image", tn.TextType.IMAGE, "https://i.imgur.com/3elNhQu.png"
+            ),
+        ]
+        self.assertListEqual(expected, new_nodes)
+
+    def test_split_nodes_link(self):
+        node = tn.TextNode(
+            "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)",
+            tn.TextType.TEXT,
+        )
+        new_nodes = ut.split_nodes_link([node])
+        expected = [
+            tn.TextNode("This is text with a link ", tn.TextType.TEXT),
+            tn.TextNode("to boot dev", tn.TextType.LINK, "https://www.boot.dev"),
+            tn.TextNode(" and ", tn.TextType.TEXT),
+            tn.TextNode(
+                "to youtube", tn.TextType.LINK, "https://www.youtube.com/@bootdotdev"
+            ),
+        ]
+        self.assertListEqual(expected, new_nodes)
+
 
 if __name__ == "__main__":
     unittest.main()
