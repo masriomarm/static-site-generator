@@ -31,19 +31,22 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
     }
     ret = []
     for node in old_nodes:
-        splits = node.text.split(delimiter)
-        if len(splits) == 3:  # valid split
-            temp = tn.TextNode(splits[0], tn.TextType.TEXT)
-            ret.append(temp)
-            temp = tn.TextNode(splits[1], deli_vals[delimiter])
-            ret.append(temp)
-            temp = tn.TextNode(splits[2], tn.TextType.TEXT)
-            ret.append(temp)
-        elif len(splits) == 1:  # no more splits found
-            temp = tn.TextNode(splits[0], tn.TextType.TEXT)
-            ret.append(temp)
-        else:
-            raise ValueError("Invalid markdown syntax - unmatched delimiters.")
+        splits = node.text.split(delimiter, 2)
+        while len(splits) >= 1:
+            if len(splits) == 3:  # valid split
+                temp = tn.TextNode(splits[0], tn.TextType.TEXT)
+                ret.append(temp)
+                temp = tn.TextNode(splits[1], deli_vals[delimiter])
+                ret.append(temp)
+                temp = tn.TextNode(splits[2], tn.TextType.TEXT)
+                splits = temp.text.split(delimiter, 2)
+            elif len(splits) == 1:  # no more splits found
+                temp = tn.TextNode(splits[0], tn.TextType.TEXT)
+                if temp.text:
+                    ret.append(temp)
+                break
+            else:
+                raise ValueError("Invalid markdown syntax - unmatched delimiters.")
     return ret
 
 

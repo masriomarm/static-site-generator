@@ -43,6 +43,22 @@ class Testutils(unittest.TestCase):
 
         self.assertEqual(expected, new_nodes)
 
+    def test_split_nodes_delimiter_multiple(self):
+        node = tn.TextNode(
+            "This is text with a **bolded phrase** word and **another bolded phrase**",
+            tn.TextType.TEXT,
+        )
+        new_nodes = ut.split_nodes_delimiter([node], "**", tn.TextType.CODE)
+
+        expected = [
+            tn.TextNode("This is text with a ", tn.TextType.TEXT),
+            tn.TextNode("bolded phrase", tn.TextType.BOLD),
+            tn.TextNode(" word and ", tn.TextType.TEXT),
+            tn.TextNode("another bolded phrase", tn.TextType.BOLD),
+        ]
+
+        self.assertEqual(expected, new_nodes)
+
     def test_split_nodes_delimiter_none(self):
         temp = "This is text with a normal text and none delimiter"
         node = tn.TextNode(temp, tn.TextType.TEXT)
