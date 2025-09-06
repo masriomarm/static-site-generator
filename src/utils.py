@@ -118,3 +118,13 @@ def split_nodes_link(old_nodes):
             ret.append(node)
 
     return ret
+
+
+def text_to_textnodes(text):
+    nodes = [tn.TextNode(text, tn.TextType.TEXT)]
+    nodes = split_nodes_delimiter(nodes, "`", tn.TextType.CODE)
+    nodes = split_nodes_image(nodes)
+    nodes = split_nodes_link(nodes)
+    nodes = split_nodes_delimiter(nodes, "**", tn.TextType.BOLD)
+    nodes = split_nodes_delimiter(nodes, "_", tn.TextType.ITALIC)
+    return nodes
