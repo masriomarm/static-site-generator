@@ -39,6 +39,9 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
             ret.append(temp)
             temp = tn.TextNode(splits[2], tn.TextType.TEXT)
             ret.append(temp)
+        elif len(splits) == 1:  # no more splits found
+            temp = tn.TextNode(splits[0], tn.TextType.TEXT)
+            ret.append(temp)
         else:
             raise ValueError("Invalid markdown syntax - unmatched delimiters.")
     return ret

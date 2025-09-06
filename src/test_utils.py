@@ -43,6 +43,17 @@ class Testutils(unittest.TestCase):
 
         self.assertEqual(expected, new_nodes)
 
+    def test_split_nodes_delimiter_none(self):
+        temp = "This is text with a normal text and none delimiter"
+        node = tn.TextNode(temp, tn.TextType.TEXT)
+        new_nodes = ut.split_nodes_delimiter([node], "**", tn.TextType.CODE)
+
+        expected = [
+            tn.TextNode(temp, tn.TextType.TEXT),
+        ]
+
+        self.assertEqual(expected, new_nodes)
+
     def test_split_nodes_bold_unbalanced(self):
         node = tn.TextNode("This is text with a **bolded phrase word", tn.TextType.TEXT)
         with self.assertRaises(ValueError):
