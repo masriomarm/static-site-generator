@@ -24,22 +24,24 @@ def text_node_to_html_node(text_node: tn.TextNode):
 
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
-    deli_vals = {
-        "**": tn.TextType.BOLD,
-        "`": tn.TextType.CODE,
-        "_": tn.TextType.ITALIC,
-    }
     ret = []
     for node in old_nodes:
+        if node.text_type != tn.TextType.TEXT:
+            ret.append(node)
+            continue
         splits = node.text.split(delimiter, 2)
         while len(splits) >= 1:
             if len(splits) == 3:  # valid split
                 temp = tn.TextNode(splits[0], tn.TextType.TEXT)
-                ret.append(temp)
-                temp = tn.TextNode(splits[1], deli_vals[delimiter])
+                if temp.text:
+                    ret.append(temp)
+                temp = tn.TextNode(splits[1], text_type)
                 ret.append(temp)
                 temp = tn.TextNode(splits[2], tn.TextType.TEXT)
-                splits = temp.text.split(delimiter, 2)
+                if temp.text:
+                    splits = temp.text.split(delimiter, 2)
+                else:
+                    break
             elif len(splits) == 1:  # no more splits found
                 temp = tn.TextNode(splits[0], tn.TextType.TEXT)
                 if temp.text:
@@ -66,11 +68,15 @@ def split_nodes_image(old_nodes):
     delimiter = r"(!\[[^\[\]]*\]\([^\(\)]*\))"
     ret = []
     for node in old_nodes:
+        if node.text_type != tn.TextType.TEXT:
+            ret.append(node)
+            continue
         receieved = node.text
         splits = re.split(delimiter, receieved)
-        splits.pop()
         found = re.findall(delimiter, receieved)
         for s in splits:
+            if not s:
+                continue
             node = None
             if s in found:
                 # split text and link parts.
@@ -90,11 +96,15 @@ def split_nodes_link(old_nodes):
     delimiter = r"(\[[^\[\]]*\]\([^\(\)]*\))"
     ret = []
     for node in old_nodes:
+        if node.text_type != tn.TextType.TEXT:
+            ret.append(node)
+            continue
         receieved = node.text
         splits = re.split(delimiter, receieved)
-        splits.pop()
         found = re.findall(delimiter, receieved)
         for s in splits:
+            if not s:
+                continue
             node = None
             if s in found:
                 # split text and link parts.

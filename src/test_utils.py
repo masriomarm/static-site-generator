@@ -33,7 +33,7 @@ class Testutils(unittest.TestCase):
         node = tn.TextNode(
             "This is text with a **bolded phrase** word", tn.TextType.TEXT
         )
-        new_nodes = ut.split_nodes_delimiter([node], "**", tn.TextType.CODE)
+        new_nodes = ut.split_nodes_delimiter([node], "**", tn.TextType.BOLD)
 
         expected = [
             tn.TextNode("This is text with a ", tn.TextType.TEXT),
@@ -48,13 +48,58 @@ class Testutils(unittest.TestCase):
             "This is text with a **bolded phrase** word and **another bolded phrase**",
             tn.TextType.TEXT,
         )
-        new_nodes = ut.split_nodes_delimiter([node], "**", tn.TextType.CODE)
+        new_nodes = ut.split_nodes_delimiter([node], "**", tn.TextType.BOLD)
 
         expected = [
             tn.TextNode("This is text with a ", tn.TextType.TEXT),
             tn.TextNode("bolded phrase", tn.TextType.BOLD),
             tn.TextNode(" word and ", tn.TextType.TEXT),
             tn.TextNode("another bolded phrase", tn.TextType.BOLD),
+        ]
+
+        self.assertEqual(expected, new_nodes)
+
+    def test_split_nodes_delimiter_multiple_adjacent_bold(self):
+        node = tn.TextNode(
+            "This is text with a **bolded phrase****adjacent another bolded phrase**",
+            tn.TextType.TEXT,
+        )
+        new_nodes = ut.split_nodes_delimiter([node], "**", tn.TextType.BOLD)
+
+        expected = [
+            tn.TextNode("This is text with a ", tn.TextType.TEXT),
+            tn.TextNode("bolded phrase", tn.TextType.BOLD),
+            tn.TextNode("adjacent another bolded phrase", tn.TextType.BOLD),
+        ]
+
+        self.assertEqual(expected, new_nodes)
+
+    def test_split_nodes_delimiter_multiple_adjacent_italic(self):
+        node = tn.TextNode(
+            "This is text with a _italic phrase__adjacent another italic phrase_",
+            tn.TextType.TEXT,
+        )
+        new_nodes = ut.split_nodes_delimiter([node], "_", tn.TextType.ITALIC)
+
+        expected = [
+            tn.TextNode("This is text with a ", tn.TextType.TEXT),
+            tn.TextNode("italic phrase", tn.TextType.ITALIC),
+            tn.TextNode("adjacent another italic phrase", tn.TextType.ITALIC),
+        ]
+
+        self.assertEqual(expected, new_nodes)
+
+    def test_split_nodes_delimiter_multiple_adjacent_code(self):
+        node = tn.TextNode(
+            "This is text with a `code phrase``adjacent another code phrase`",
+            tn.TextType.TEXT,
+        )
+        new_nodes = ut.split_nodes_delimiter([node], "`", tn.TextType.CODE)
+
+        expected = [
+            tn.TextNode("This is text with a ", tn.TextType.TEXT),
+            tn.TextNode("code phrase", tn.TextType.CODE),
+            tn.TextNode("adjacent another code phrase", tn.TextType.CODE),
         ]
 
         self.assertEqual(expected, new_nodes)
@@ -77,7 +122,7 @@ class Testutils(unittest.TestCase):
 
     def test_split_nodes_italic(self):
         node = tn.TextNode("This is text with a _italic phrase_ word", tn.TextType.TEXT)
-        new_nodes = ut.split_nodes_delimiter([node], "_", tn.TextType.CODE)
+        new_nodes = ut.split_nodes_delimiter([node], "_", tn.TextType.ITALIC)
 
         expected = [
             tn.TextNode("This is text with a ", tn.TextType.TEXT),
