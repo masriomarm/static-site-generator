@@ -31,10 +31,15 @@ def block_to_block_type(block: str):
         BlockType.code: (r"^.*`{3}.*`{3}$", re.MULTILINE | re.DOTALL),
         BlockType.quote: (r"^\s*>.*$", 0),
         BlockType.unordered_list: (r"^\s*-.*$", 0),
+        BlockType.ordered_list: (r"^\s*\d+\..*$", 0),
     }
 
     for type, pat in pattern_type.items():
-        if type == BlockType.quote or type == BlockType.unordered_list:
+        if (
+            type == BlockType.quote
+            or type == BlockType.unordered_list
+            or type == BlockType.ordered_list
+        ):
             target_type = ret
             lines = block.strip().splitlines()
             for line in lines:
