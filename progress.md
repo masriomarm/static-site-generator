@@ -15,14 +15,14 @@ We need a way to inspect a block of markdown text and determine what type of blo
 Assignment
 
 - [x] Create a `BlockType` enum with the block types from above.
-- [ ] Create a block_to_block_type function that takes a single block of markdown text as input and returns the `BlockType` representing the type of block it is. You can assume all leading and trailing whitespace were already stripped (we did that in a previous lesson).
+- [x] Create a block_to_block_type function that takes a single block of markdown text as input and returns the `BlockType` representing the type of block it is. You can assume all leading and trailing whitespace were already stripped (we did that in a previous lesson).
     - [x] Headings start with 1-6 # characters, followed by a space and then the heading text.
     - [x] Code blocks must start with 3 backticks and end with 3 backticks.
-    - [ ] Every line in a quote block must start with a > character.
-    - [ ] Every line in an unordered list block must start with a - character, followed by a space.
-    - [ ] Every line in an ordered list block must start with a number followed by a . character and a space. The number must start at 1 and increment by 1 for each line.
-    - [ ] If none of the above conditions are met, the block is a normal paragraph.
-- [ ] Write a bunch of unit tests for the function.
+    - [x] Every line in a quote block must start with a > character.
+    - [x] Every line in an unordered list block must start with a - character, followed by a space.
+    - [x] Every line in an ordered list block must start with a number followed by a . character and a space. The number must start at 1 and increment by 1 for each line.
+    - [x] If none of the above conditions are met, the block is a normal paragraph.
+- [x] Write a bunch of unit tests for the function.
 
 Run and submit the CLI tests from the root of the project.
 
