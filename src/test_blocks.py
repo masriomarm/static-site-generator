@@ -4,6 +4,16 @@ import blocks as bk
 
 
 class Testutils(unittest.TestCase):
+    def test_block_type_quote(self):
+        md = """
+        > Quoted text 1
+        > Quoted text 2
+        > Quoted text 3
+        > Quoted text 4
+        """
+        type = bk.block_to_block_type(md)
+        self.assertEqual(type, bk.BlockType.quote)
+
     def test_block_type_code(self):
         md = """
         ``` python

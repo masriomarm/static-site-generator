@@ -29,12 +29,24 @@ def block_to_block_type(block: str):
     pattern_type = {
         BlockType.heading: (r"^#{1,6}\s+", 0),
         BlockType.code: (r"^.*`{3}.*`{3}$", re.MULTILINE | re.DOTALL),
+        BlockType.quote: (r"^\s*>.*$", 0),
     }
 
     for type, pat in pattern_type.items():
-        match = re.match(pat[0], block, pat[1])
-        if match:
-            ret = type
-            break
+        if type == BlockType.quote:
+            target_type = ret
+            lines = block.strip().splitlines()
+            for line in lines:
+                match = re.match(pat[0], line, pat[1])
+                if match:
+                    target_type = type
+                else:
+                    target_type = ret
+            ret = target_type
+        else:
+            match = re.match(pat[0], block, pat[1])
+            if match:
+                ret = type
+                break
 
     return ret
