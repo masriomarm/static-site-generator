@@ -27,11 +27,12 @@ def block_to_block_type(block: str):
     ret = BlockType.paragraph
 
     pattern_type = {
-        r"#{1,6}\s+": BlockType.heading,
+        BlockType.heading: (r"^#{1,6}\s+", 0),
+        BlockType.code: (r"^.*`{3}.*`{3}$", re.MULTILINE | re.DOTALL),
     }
 
-    for pat, type in pattern_type.items():
-        match = re.match(pat, block)
+    for type, pat in pattern_type.items():
+        match = re.match(pat[0], block, pat[1])
         if match:
             ret = type
             break

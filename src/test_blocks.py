@@ -4,6 +4,15 @@ import blocks as bk
 
 
 class Testutils(unittest.TestCase):
+    def test_block_type_code(self):
+        md = """
+        ``` python
+        print("Testing...")
+        ```
+        """
+        type = bk.block_to_block_type(md)
+        self.assertEqual(type, bk.BlockType.code)
+
     def test_block_type_heading1(self):
         md = "# Heading1"
         type = bk.block_to_block_type(md)
