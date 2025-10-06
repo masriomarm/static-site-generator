@@ -4,6 +4,16 @@ import blocks as bk
 
 
 class Testutils(unittest.TestCase):
+    def test_block_type_list_unordered(self):
+        md = """
+        - unordered list text 1
+        - unordered list text 2
+        - unordered list text 3
+        - unordered list text 4
+        """
+        type = bk.block_to_block_type(md)
+        self.assertEqual(type, bk.BlockType.unordered_list)
+
     def test_block_type_quote(self):
         md = """
         > Quoted text 1
