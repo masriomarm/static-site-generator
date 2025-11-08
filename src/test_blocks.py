@@ -1,6 +1,6 @@
 import unittest
 
-import blocks as bk
+import src.blocks as bk
 
 
 class Testutils(unittest.TestCase):

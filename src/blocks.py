@@ -1,5 +1,7 @@
 import re
 from enum import Enum
+import src.utils as ut
+import src.htmlnode as hn
 
 
 def markdown_to_blocks(text):

@@ -1,8 +1,8 @@
 import unittest
 
-import utils as ut
-import textnode as tn
-import htmlnode as hn
+import src.utils as ut
+import src.textnode as tn
+import src.htmlnode as hn
 
 
 class Testutils(unittest.TestCase):
