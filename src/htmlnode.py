@@ -39,6 +39,7 @@ class LeafNode(HTMLNode):
             raise ValueError("invalid HTML: no value")
 
         ret = self.value
+        ret = ret.replace("\n", " ")
         if self.tag:
             ret = f"<{self.tag}{self.props_to_html()}>{self.value}</{self.tag}>"
         return ret
