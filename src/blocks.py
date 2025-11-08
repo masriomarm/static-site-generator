@@ -68,3 +68,42 @@ def block_to_block_type(block: str):
                 break
 
     return ret
+def markdown_to_html_node(markdown, debug=False):
+    # - [ ] Split the markdown into blocks (you already have a function for this)
+    blocks = markdown_to_blocks(markdown)
+    # - [ ] Loop over each block:
+    children_parent = []
+    for block in blocks:
+        childrens = []
+        # - [ ] Determine the type of block (you already have a function for this)
+        nodes = ut.text_to_textnodes(block)
+        if debug:
+            print("====== Nodes ======")
+            pprint(nodes)
+        for node in nodes:
+            html_node = ut.text_node_to_html_node(node)
+            leaf_node = hn.LeafNode(html_node.tag, html_node.value, html_node.props)
+            childrens.append(leaf_node)
+            leaf_node = leaf_node.to_html()
+
+        block_type = block_to_block_type(block)
+
+        if debug:
+            print("====== Block ======")
+            pprint(block_type)
+            pprint(block)
+        if block_type == BlockType.paragraph:
+            # create a parent node of p tag
+            parent = hn.ParentNode("p", childrens)
+            if debug:
+                pprint(parent)
+                print(parent.to_html())
+            children_parent.append(parent)
+
+    grandparent = hn.ParentNode("div", children_parent)
+    ret = grandparent
+    if debug:
+        pprint(grandparent)
+        print(ret.to_html())
+
+    return ret
