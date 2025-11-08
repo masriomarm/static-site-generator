@@ -11,7 +11,12 @@ def markdown_to_blocks(text):
 
 class BlockType(Enum):
     paragraph = "paragraph"
-    heading = "heading"
+    heading1 = "heading1"
+    heading2 = "heading2"
+    heading3 = "heading3"
+    heading4 = "heading4"
+    heading5 = "heading5"
+    heading6 = "heading6"
     code = "code"
     quote = "quote"
     unordered_list = "unordered_list"
@@ -27,7 +32,12 @@ def block_to_block_type(block: str):
     ret = BlockType.paragraph
 
     pattern_type = {
-        BlockType.heading: (r"^#{1,6}\s+", 0),
+        BlockType.heading1: (r"^#{1}\s+", 0),
+        BlockType.heading2: (r"^#{2}\s+", 0),
+        BlockType.heading3: (r"^#{3}\s+", 0),
+        BlockType.heading4: (r"^#{4}\s+", 0),
+        BlockType.heading5: (r"^#{5}\s+", 0),
+        BlockType.heading6: (r"^#{6}\s+", 0),
         BlockType.code: (r"^.*`{3}.*`{3}$", re.MULTILINE | re.DOTALL),
         BlockType.quote: (r"^\s*>.*$", 0),
         BlockType.unordered_list: (r"^\s*-.*$", 0),
