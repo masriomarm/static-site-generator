@@ -104,7 +104,23 @@ class BlockNodeParagraph(BlockNode):
 
 
 class BlockNodeQuote(BlockNode):
-    pass
+    def __init__(self, val, debug=False):
+        super().__init__(val)
+        lines = self.val.split("\n")
+        self.quote_val = ""
+        if debug:
+            print(lines)
+        for line in lines:
+            pattern = (r"^\s*> (.*)$", re.DOTALL)
+            matches = re.search(pattern[0], line, pattern[1])
+            if debug:
+                print("matches =", matches)
+            self.quote_val += matches.group(1) + "\n"
+        if debug:
+            print("quote val =", self.quote_val)
+
+    def to_html(self):
+        return hn.LeafNode(self.tag, self.quote_val).to_html()
 
 
 class BlockNodeCode(BlockNode):
