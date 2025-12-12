@@ -164,11 +164,47 @@ class BlockNodeHeading6(BlockNode):
 
 
 class BlockNodeListOrdered(BlockNode):
-    pass
+    def __init__(self, val, debug=False):
+        super().__init__(val)
+        lines = self.val.split("\n")
+        self.list_val = ""
+        if debug:
+            print(lines)
+        for line in lines:
+            pattern = (r"^\s*\d+\. (.*)$", 0)
+            matches = re.search(pattern[0], line, pattern[1])
+            if debug:
+                print("matches =", matches)
+            item = matches.group(1)
+            item = hn.LeafNode("li", item).to_html()
+            self.list_val += item
+        if debug:
+            print("list val =", self.list_val)
+
+    def to_html(self):
+        return hn.LeafNode(self.tag, self.list_val).to_html()
 
 
 class BlockNodeListUnordered(BlockNode):
-    pass
+    def __init__(self, val, debug=False):
+        super().__init__(val)
+        lines = self.val.split("\n")
+        self.list_val = ""
+        if debug:
+            print(lines)
+        for line in lines:
+            pattern = (r"^\s*- (.*)$", 0)
+            matches = re.search(pattern[0], line, pattern[1])
+            if debug:
+                print("matches =", matches)
+            item = matches.group(1)
+            item = hn.LeafNode("li", item).to_html()
+            self.list_val += item
+        if debug:
+            print("list val =", self.list_val)
+
+    def to_html(self):
+        return hn.LeafNode(self.tag, self.list_val).to_html()
 
 
 block_type_map = {
