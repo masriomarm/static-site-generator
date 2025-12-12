@@ -108,7 +108,19 @@ class BlockNodeQuote(BlockNode):
 
 
 class BlockNodeCode(BlockNode):
-    pass
+    def __init__(self, val, debug=False):
+        super().__init__(val)
+        pattern = (r"^.*`{3}\n+(.*)`{3}$", re.MULTILINE | re.DOTALL)
+        matches = re.search(pattern[0], self.val, pattern[1])
+        self.code_val = matches.group(1).lstrip()
+        if debug:
+            print("matches =", matches)
+            print("code val =", self.code_val)
+
+    def to_html(self):
+        return hn.LeafNode(
+            "pre", (hn.LeafNode(self.tag, self.code_val).to_html())
+        ).to_html()
 
 
 class BlockNodeHeading1(BlockNode):

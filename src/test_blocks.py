@@ -31,20 +31,20 @@ class Testutils(unittest.TestCase):
     #             "<div><ul><li>unordered list text 1 with <code>inline code</code></li><li>unordered list text 2 with <b>inline bold</b> and <code>inline code</code></li><li>unordered list text 3 with <i>inline italic</i>, <b>inline bold</b>, and <code>inline code</code></li></ul></div>",
     #         )
 
-    #     def test_block_code(self):
-    #         md = """
-    # ```
-    # This is text that _should_ remain
-    # the **same** even with inline stuff
-    # ```
-    # """
+    def test_block_code(self):
+        md = """
+```
+This is text that _should_ remain
+the **same** even with inline stuff
+```
+"""
 
-    #         node = bk.markdown_to_html_node(md)
-    #         html = node.to_html()
-    #         self.assertEqual(
-    #             html,
-    #             "<div><pre><code>This is text that _should_ remain\nthe **same** even with inline stuff\n</code></pre></div>",
-    #         )
+        node = bk.markdown_to_html_node(md)
+        html = node
+        self.assertEqual(
+            html,
+            "<div><pre><code>This is text that _should_ remain\nthe **same** even with inline stuff\n</code></pre></div>",
+        )
 
     def test_block_paragraphs(self):
         md = """
