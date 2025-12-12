@@ -10,7 +10,7 @@ Create a new function called `def markdown_to_html_node(markdown):` that convert
 
 FYI: I created an additional 8 helper functions to keep my code neat and easy to understand, because there's a lot of logic necessary for `markdown_to_html_node`. I don't want to give you my exact functions because I want you to do this from scratch. However, I'll give you the basic order of operations:
 
-- [ ] Split the markdown into blocks (you already have a function for this)
+- [x] Split the markdown into blocks (you already have a function for this)
 - [ ] Loop over each block:
     - [ ] Determine the type of block (you already have a function for this)
     - [ ] Based on the type of block, create a new `HTMLNode` with the proper data

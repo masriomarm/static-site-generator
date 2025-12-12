@@ -65,9 +65,10 @@ def block_to_block_type(block: str) -> BlockType:
 
 
 class BlockNode:
-    def __init__(self, val):
+    def __init__(self, val, debug=True):
         self.val = val
-        self.type: BlockType = block_to_block_type(val)
+        print("Block node val =", self.val)
+        self.type: BlockType = block_to_block_type(self.val)
         self.tag = self.type.value
         self.children = []
         self.textNodes = []
@@ -140,26 +141,88 @@ class BlockNodeCode(BlockNode):
 
 
 class BlockNodeHeading1(BlockNode):
-    pass
+    def __init__(self, val, debug=True):
+        super().__init__(val)
+        pattern = (r"^#{1}\s(.*)", 0)
+        matches = re.search(pattern[0], self.val, pattern[1])
+        self.head_val = matches.group(1)
+        if debug:
+            print("matches =", matches)
+            print("heading val =", self.head_val)
+
+    def to_html(self):
+        return hn.LeafNode(self.tag, self.head_val).to_html()
 
 
 class BlockNodeHeading2(BlockNode):
-    pass
+    def __init__(self, val, debug=True):
+        super().__init__(val)
+        pattern = (r"^#{2}\s(.*)", 0)
+        matches = re.search(pattern[0], self.val, pattern[1])
+        self.head_val = matches.group(1)
+        if debug:
+            print("matches =", matches)
+            print("heading val =", self.head_val)
+
+    def to_html(self):
+        return hn.LeafNode(self.tag, self.head_val).to_html()
 
 
 class BlockNodeHeading3(BlockNode):
-    pass
+    def __init__(self, val, debug=True):
+        super().__init__(val)
+        pattern = (r"^#{3}\s(.*)", 0)
+        matches = re.search(pattern[0], self.val, pattern[1])
+        self.head_val = matches.group(1)
+        if debug:
+            print("matches =", matches)
+            print("heading val =", self.head_val)
+
+    def to_html(self):
+        return hn.LeafNode(self.tag, self.head_val).to_html()
 
 
 class BlockNodeHeading4(BlockNode):
-    pass
+    def __init__(self, val, debug=True):
+        super().__init__(val)
+        pattern = (r"^#{4}\s(.*)", 0)
+        matches = re.search(pattern[0], self.val, pattern[1])
+        self.head_val = matches.group(1)
+        if debug:
+            print("matches =", matches)
+            print("heading val =", self.head_val)
+
+    def to_html(self):
+        return hn.LeafNode(self.tag, self.head_val).to_html()
 
 
 class BlockNodeHeading5(BlockNode):
-    pass
+    def __init__(self, val, debug=True):
+        super().__init__(val)
+        pattern = (r"^#{5}\s(.*)", 0)
+        matches = re.search(pattern[0], self.val, pattern[1])
+        self.head_val = matches.group(1)
+        if debug:
+            print("matches =", matches)
+            print("heading val =", self.head_val)
+
+    def to_html(self):
+        return hn.LeafNode(self.tag, self.head_val).to_html()
 
 
 class BlockNodeHeading6(BlockNode):
+    def __init__(self, val, debug=True):
+        super().__init__(val)
+        pattern = (r"^#{6}\s(.*)", 0)
+        matches = re.search(pattern[0], self.val, pattern[1])
+        self.head_val = matches.group(1)
+        if debug:
+            print("matches =", matches)
+            print("heading val =", self.head_val)
+
+    def to_html(self):
+        return hn.LeafNode(self.tag, self.head_val).to_html()
+
     pass
 
 
