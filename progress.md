@@ -1,3 +1,35 @@
+# `CH5-L1`
+
+Copy Static
+
+We've written a lot of unit tests, it's time to start pulling all the pieces together into a working static site generator. Let's work on that main.py file that we've been neglecting.
+Assignment
+
+1. [ ] Add the following files to a static directory in the root of your project (the contents of the files are at the bottom of this page):
+    - `static/images/tolkien.png`
+    - `static/index.css`
+2. [ ] Write a recursive function that copies all the contents from a source directory to a destination directory (in our case, static to public)
+    It should first delete all the contents of the destination directory (public) to ensure that the copy is clean.
+    It should copy all files and subdirectories, nested files, etc.
+    I recommend logging the path of each file you copy, so you can see what's happening as you run and debug your code.
+
+Here are some of the standard library docs that might be helpful:
+
+- `os.path.exists`
+- `os.listdir`
+- `os.path.join`
+- `os.path.isfile`
+- `os.mkdir`
+- `shutil.copy`
+- `shutil.rmtree`
+
+3. [ ] Hook the function up to your main function and test it out. I didn't use a unit test for this one because it interacts with the file system: I just tested it manually.
+4. [ ] Add the public/ directory to your .gitignore file. This is where the generated site will live. As a general rule, it's bad to commit generated stuff, especially if it can be regenerated easily.
+5. [ ] Ensure that running main.sh generates the public directory and all the copied content correctly.
+
+Run and submit the CLI tests from the root of the project.
+Assignment
+
 # `CH4-L3`
 
 Block to HTML

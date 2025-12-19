@@ -1,11 +1,8 @@
-import textnode as tn
+import helper_utils as hu
 
 
 def main():
-    inst = tn.TextNode(
-        "This is some anchor text", tn.TextType.LINKS, "https://www.boot.dev"
-    )
-    print(inst)
+    hu.util_copy_tree("static", "public", debug=False)
 
 
 main()
