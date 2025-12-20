@@ -65,9 +65,10 @@ def block_to_block_type(block: str) -> BlockType:
 
 
 class BlockNode:
-    def __init__(self, val, debug=True):
+    def __init__(self, val, debug=False):
         self.val = val
-        print("Block node val =", self.val)
+        if debug:
+            print("Block node val =", self.val)
         self.type: BlockType = block_to_block_type(self.val)
         self.tag = self.type.value
         self.children = []
@@ -141,7 +142,7 @@ class BlockNodeCode(BlockNode):
 
 
 class BlockNodeHeading1(BlockNode):
-    def __init__(self, val, debug=True):
+    def __init__(self, val, debug=False):
         super().__init__(val)
         pattern = (r"^#{1}\s(.*)", 0)
         matches = re.search(pattern[0], self.val, pattern[1])
@@ -155,7 +156,7 @@ class BlockNodeHeading1(BlockNode):
 
 
 class BlockNodeHeading2(BlockNode):
-    def __init__(self, val, debug=True):
+    def __init__(self, val, debug=False):
         super().__init__(val)
         pattern = (r"^#{2}\s(.*)", 0)
         matches = re.search(pattern[0], self.val, pattern[1])
@@ -169,7 +170,7 @@ class BlockNodeHeading2(BlockNode):
 
 
 class BlockNodeHeading3(BlockNode):
-    def __init__(self, val, debug=True):
+    def __init__(self, val, debug=False):
         super().__init__(val)
         pattern = (r"^#{3}\s(.*)", 0)
         matches = re.search(pattern[0], self.val, pattern[1])
@@ -183,7 +184,7 @@ class BlockNodeHeading3(BlockNode):
 
 
 class BlockNodeHeading4(BlockNode):
-    def __init__(self, val, debug=True):
+    def __init__(self, val, debug=False):
         super().__init__(val)
         pattern = (r"^#{4}\s(.*)", 0)
         matches = re.search(pattern[0], self.val, pattern[1])
@@ -197,7 +198,7 @@ class BlockNodeHeading4(BlockNode):
 
 
 class BlockNodeHeading5(BlockNode):
-    def __init__(self, val, debug=True):
+    def __init__(self, val, debug=False):
         super().__init__(val)
         pattern = (r"^#{5}\s(.*)", 0)
         matches = re.search(pattern[0], self.val, pattern[1])
@@ -211,7 +212,7 @@ class BlockNodeHeading5(BlockNode):
 
 
 class BlockNodeHeading6(BlockNode):
-    def __init__(self, val, debug=True):
+    def __init__(self, val, debug=False):
         super().__init__(val)
         pattern = (r"^#{6}\s(.*)", 0)
         matches = re.search(pattern[0], self.val, pattern[1])
