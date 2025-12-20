@@ -1,5 +1,18 @@
 import os
 import shutil
+import src.block_node as bn
+
+
+def extract_title(heading):
+    """
+    It should pull the h1 header from the markdown file (the line that starts with a single #) and return it.
+    If there is no h1 header, raise an exception.
+    extract_title("# Hello") should return "Hello" (strip the # and any leading or trailing whitespace)
+    """
+    h1 = bn.BlockNodeHeading1(heading)
+    if not h1.head_val:
+        raise ValueError(f"Invalid heading <{heading}>")
+    return h1.head_val.strip()
 
 
 def util_copy_tree(src, dst, debug=True):
