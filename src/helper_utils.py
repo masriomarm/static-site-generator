@@ -1,6 +1,8 @@
 import os
 import shutil
 import src.block_node as bn
+import src.blocks as bk
+import difflib
 
 
 def extract_title(heading):
@@ -42,3 +44,45 @@ def util_copy_tree(src, dst, debug=True):
         os.mkdir(dstPath)
 
     shutil.copytree(srcPath, dstPath, dirs_exist_ok=True)
+
+
+def generate_page(from_path, template_path, dest_path, debug=False):
+    """
+    Create a generate_page(from_path, template_path, dest_path) function. It should:
+
+        1. Print a message like "Generating page from from_path to dest_path using template_path".
+        2. Read the markdown file at from_path and store the contents in a variable.
+        3. Read the template file at template_path and store the contents in a variable.
+        4. Use your markdown_to_html_node function and .to_html() method to convert the markdown file to an HTML string.
+        5. Use the extract_title function to grab the title of the page.
+        6. Replace the {{ Title }} and {{ Content }} placeholders in the template with the HTML and title you generated.
+        7. Write the new full HTML page to a file at dest_path. Be sure to create any necessary directories if they don't exist.
+    """
+    print(f"Generating page from {from_path} to {dest_path} using {template_path}")
+    seperator = "<<<<<<>>>>>>>"
+    with open(from_path, "r") as file:
+        fileFrom = file.read()
+
+    with open(template_path, "r") as file:
+        fileTemplate = file.read()
+
+    htmlGenerated = bk.markdown_to_blocks(fileFrom)
+    htmlTitle = extract_title(htmlGenerated[0])
+    if debug:
+        print(seperator)
+        print(htmlTitle)
+
+    if debug:
+        contents = "\n\n".join(htmlGenerated)
+        print(seperator)
+        print(contents == fileFrom)
+        diff = difflib.ndiff(
+            contents.splitlines(keepends=True), fileFrom.splitlines(keepends=True)
+        )
+        print("".join(diff))
+        print(seperator)
+
+    htmlGenerated = bk.markdown_to_html_node(fileFrom)
+    if debug:
+        print(seperator)
+        print(htmlGenerated)
