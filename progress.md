@@ -25,9 +25,9 @@ Assignment
     7. [x] Write the new full HTML page to a file at dest_path. Be sure to create any necessary directories if they don't exist.
 
 6. [ ] Update main.py to:
-    1. [ ] Delete anything in the public directory.
-    2. [ ] Copy all the static files from static to public.
-    3. [ ] Generate a page from content/index.md using template.html and write it to public/index.html.
+    1. [x] Delete anything in the public directory.
+    2. [x] Copy all the static files from static to public.
+    3. [x] Generate a page from content/index.md using template.html and write it to public/index.html.
 
 7. [ ] Update your main.sh script to start a simple web server after generating the site. Use the same built-in Python server as before:
     ```
