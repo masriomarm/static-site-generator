@@ -27,17 +27,21 @@ def util_copy_tree(src, dst, debug=True):
     if debug:
         print("Destination path received:", srcPath)
 
-    srcContents = os.listdir(srcPath)
-    if debug:
-        print("Source contents:\n", srcContents)
-        for srcItem in srcContents:
-            print(srcItem)
+    try:
+        srcContents = os.listdir(srcPath)
+        if debug:
+            print("Source contents:\n", srcContents)
+            for srcItem in srcContents:
+                print(srcItem)
 
-    srcContentsAbs = list(map(lambda p: os.path.abspath(p), srcContents))
-    if debug:
-        print("Source contents absolute:\n", srcContentsAbs)
-        for srcItem in srcContentsAbs:
-            print(srcItem)
+        srcContentsAbs = list(map(lambda p: os.path.abspath(p), srcContents))
+        if debug:
+            print("Source contents absolute:\n", srcContentsAbs)
+            for srcItem in srcContentsAbs:
+                print(srcItem)
+    except Exception as e:
+        print("Failed with exception:", e, file=sys.stderr)
+        pass
 
     if not os.path.exists(dstPath):
         if debug:
