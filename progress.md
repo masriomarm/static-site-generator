@@ -1,3 +1,21 @@
+# `CH5-L3`
+
+A site with a single page isn't very fun. Our static site generator can generate entire websites!
+Assignment
+
+- [ ] Add the following markdown files. The markdown itself can be copy pasted from the bottom of this page:
+    - `content/blog/glorfindel/index.md`
+    - `content/blog/tom/index.md`
+    - `content/blog/majesty/index.md`
+    - `content/contact/index.md`
+- [ ] Add the following images to the static/images directory:
+    - `glorfindel.png`
+    - `tom.png`
+    - `rivendell.png`
+- [ ] Run the generator to copy all the new stuff in static into the public directory.
+
+Run and submit the CLI tests from the root of the project.
+
 # `CH5-L2`
 Generate Page
 
