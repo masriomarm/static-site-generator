@@ -1,3 +1,28 @@
+# `CH5-L4`
+
+Generate Pages Recursively
+
+We only have one last function to write! We need to generate all the HTML for those new pages we added to the site.
+Assignment
+
+- [ ] Create a `generate_pages_recursive(dir_path_content, template_path, dest_dir_path)` function. It should:
+    - [ ] Crawl every entry in the content directory
+    - [ ] For each markdown file found, generate a new .html file using the same template.html. The generated pages should be written to the public directory in the same directory structure.
+- [ ] Change your main function to use generate_pages_recursive instead of generate_page. You should generate a page for every markdown file in the content directory and write the results to the public directory.
+- [ ] Run the new program and ensure that both pages on the site are generated correctly and you can navigate between them.
+
+Run and submit the CLI tests from the root of the project and with the server running.
+
+Tips
+
+Here are some standard library functions that you might find useful:
+
+- `os.listdir`: lists the files inside the given directory
+- `os.path.join`: concatenate path segments
+- `os.path.isfile`: returns true if the given path is a file
+- `pathlib.Path`: the Path class
+
+
 # `CH5-L3`
 
 A site with a single page isn't very fun. Our static site generator can generate entire websites!

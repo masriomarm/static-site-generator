@@ -117,3 +117,41 @@ def generate_page(from_path, template_path, dest_path, debug=False):
 
     with open(dest_path, "w") as file:
         file.write(fileTemplate)
+
+
+def generate_pages_recursive(
+    dir_path_content, template_path, dest_dir_path, debug=False
+):
+    """
+    - [ ] Crawl every entry in the content directory
+    - [ ] For each markdown file found, generate a new .html file using the same template.html.
+        - The generated pages should be written to the public directory in the same directory structure.
+    """
+    # curPath = Path(__file__)
+    # curDir = curPath.parent
+    # prjRoot = curDir.parent
+    # srcPath = Path.joinpath(prjRoot, "content")  # target path
+    # trgPath = Path.joinpath(prjRoot, "public")  # target path
+    # tmpPath = Path.joinpath(curDir.parent, "template.html")  # content path
+
+    srcPath = dir_path_content
+    trgPath = dest_dir_path
+    tmpPath = template_path
+
+    patternMD = r"*.md"
+    filesMD = list(srcPath.rglob(patternMD))
+    filesHTML = list(
+        map(
+            lambda entry: entry.as_uri()
+            .replace(srcPath.as_uri(), trgPath.as_uri())
+            .replace(".md", ".html"),
+            filesMD,
+        )
+    )
+
+    for indx in range(len(filesMD)):
+        from_path = filesMD[indx]
+        dest_path = Path.from_uri(filesHTML[indx])
+        if debug:
+            print(f"Generating page from {from_path} to {dest_path} using {tmpPath}")
+        generate_page(from_path, tmpPath, dest_path, debug)

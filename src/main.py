@@ -6,45 +6,20 @@ from pathlib import Path
 def main():
     curPath = Path(__file__)
     curDir = curPath.parent
-    trgPath = Path.joinpath(curDir.parent, "public")  # target path
-    srcPath = Path.joinpath(curDir.parent, "static")  # source path
+    prjRoot = curDir.parent
+
+    srcPath = Path.joinpath(prjRoot, "static")
+    trgPath = Path.joinpath(prjRoot, "public")
     try:
         shutil.rmtree(trgPath)
     except FileNotFoundError:
         pass
     hu.util_copy_tree(srcPath, trgPath, debug=False)
 
-    srcPath = Path.joinpath(curDir.parent, "content", "index.md")  # source path
-    trgPath = Path.joinpath(curDir.parent, "public", "index.html")  # content path
-    tmpPath = Path.joinpath(curDir.parent, "template.html")  # content path
-    hu.generate_page(srcPath, tmpPath, trgPath)
-
-    srcPath = Path.joinpath(
-        curDir.parent, "content", "blog", "glorfindel", "index.md"
-    )  # source path
-    trgPath = Path.joinpath(
-        curDir.parent, "public", "blog", "glorfindel", "index.html"
-    )  # content path
-    tmpPath = Path.joinpath(curDir.parent, "template.html")  # content path
-    hu.generate_page(srcPath, tmpPath, trgPath)
-
-    srcPath = Path.joinpath(
-        curDir.parent, "content", "blog", "tom", "index.md"
-    )  # source path
-    trgPath = Path.joinpath(
-        curDir.parent, "public", "blog", "tom", "index.html"
-    )  # content path
-    tmpPath = Path.joinpath(curDir.parent, "template.html")  # content path
-    hu.generate_page(srcPath, tmpPath, trgPath)
-
-    srcPath = Path.joinpath(
-        curDir.parent, "content", "blog", "majesty", "index.md"
-    )  # source path
-    trgPath = Path.joinpath(
-        curDir.parent, "public", "blog", "majesty", "index.html"
-    )  # content path
-    tmpPath = Path.joinpath(curDir.parent, "template.html")  # content path
-    hu.generate_page(srcPath, tmpPath, trgPath)
+    srcPath = Path.joinpath(prjRoot, "content")
+    trgPath = Path.joinpath(prjRoot, "public")
+    tmpPath = Path.joinpath(curDir.parent, "template.html")
+    hu.generate_pages_recursive(srcPath, tmpPath, trgPath)
 
 
 main()
