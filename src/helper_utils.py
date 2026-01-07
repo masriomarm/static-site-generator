@@ -67,22 +67,26 @@ def generate_page(from_path, template_path, dest_path, debug=False):
         fileTemplate = file.read()
 
     htmlGenerated = bk.markdown_to_blocks(fileFrom)
+    if debug:
+        print(seperator)
+        print(htmlGenerated)
+
     htmlTitle = extract_title(htmlGenerated[0])
     if debug:
         print(seperator)
         print(htmlTitle)
 
-    if debug:
-        contents = "\n\n".join(htmlGenerated)
-        print(seperator)
-        print(contents == fileFrom)
-        diff = difflib.ndiff(
-            contents.splitlines(keepends=True), fileFrom.splitlines(keepends=True)
-        )
-        print("".join(diff))
-        print(seperator)
+    # if debug:
+    #     contents = "\n\n".join(htmlGenerated)
+    #     print(seperator)
+    #     print(contents == fileFrom)
+    #     diff = difflib.ndiff(
+    #         contents.splitlines(keepends=True), fileFrom.splitlines(keepends=True)
+    #     )
+    #     print("".join(diff))
+    #     print(seperator)
 
-    htmlGenerated = bk.markdown_to_html_node(fileFrom)
+    htmlGenerated = bk.markdown_to_html_node(fileFrom, debug)
     if debug:
         print(seperator)
         print(htmlGenerated)
