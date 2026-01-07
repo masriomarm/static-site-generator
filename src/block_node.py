@@ -125,7 +125,8 @@ class BlockNodeQuote(BlockNode):
             matches = re.search(pattern[0], line, pattern[1])
             if debug:
                 print("matches =", matches)
-            self.quote_val += matches.group(1) + "\n"
+            if matches:
+                self.quote_val += matches.group(1) + "\n"
         if debug:
             print("quote val =", self.quote_val)
 
