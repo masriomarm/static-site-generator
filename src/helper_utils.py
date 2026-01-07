@@ -90,3 +90,16 @@ def generate_page(from_path, template_path, dest_path, debug=False):
     if debug:
         print(seperator)
         print(htmlGenerated)
+
+    placeHolders = {
+        "{{ Title }}": htmlTitle,
+        "{{ Content }}": htmlGenerated,
+    }
+    for k, v in placeHolders.items():
+        if debug:
+            print("Replacing <", k, ">", "with <", v, ">")
+        fileTemplate = fileTemplate.replace(k, v)
+    if debug:
+        print(seperator)
+        print("Final output")
+        print(fileTemplate)

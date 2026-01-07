@@ -21,7 +21,7 @@ Assignment
     3. [x] Read the template file at template_path and store the contents in a variable.
     4. [x] Use your markdown_to_html_node function and .to_html() method to convert the markdown file to an HTML string.
     5. [x] Use the extract_title function to grab the title of the page.
-    6. [ ] Replace the {{ Title }} and {{ Content }} placeholders in the template with the HTML and title you generated.
+    6. [x] Replace the {{ Title }} and {{ Content }} placeholders in the template with the HTML and title you generated.
     7. [ ] Write the new full HTML page to a file at dest_path. Be sure to create any necessary directories if they don't exist.
 
 6. [ ] Update main.py to:
