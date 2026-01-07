@@ -20,7 +20,9 @@ def text_node_to_html_node(text_node: tn.TextNode):
             return hn.HTMLNode("a", text_node.text, None, props)
         case tn.TextType.IMAGE:
             props = {"src": text_node.url, "alt": text_node.text}
-            return hn.HTMLNode("img", None, None, props)
+            return hn.HTMLNode(
+                "img", "", None, props
+            )  # empty string to avoid none value
 
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
