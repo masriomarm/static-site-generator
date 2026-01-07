@@ -249,7 +249,8 @@ class BlockNodeListOrdered(BlockNode):
             if debug:
                 print("matches =", matches)
             item = matches.group(1)
-            item = hn.LeafNode("li", item).to_html()
+            item = BlockNodeParagraph(item, debug)
+            item = hn.ParentNode("li", item.children).to_html()
             self.list_val += item
         if debug:
             print("list val =", self.list_val)
@@ -271,7 +272,8 @@ class BlockNodeListUnordered(BlockNode):
             if debug:
                 print("matches =", matches)
             item = matches.group(1)
-            item = hn.LeafNode("li", item).to_html()
+            item = BlockNodeParagraph(item, debug)
+            item = hn.ParentNode("li", item.children).to_html()
             self.list_val += item
         if debug:
             print("list val =", self.list_val)
