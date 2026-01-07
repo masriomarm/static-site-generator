@@ -2,6 +2,7 @@ import os
 import shutil
 import src.block_node as bn
 import src.blocks as bk
+from pathlib import Path
 import difflib
 
 
@@ -103,3 +104,11 @@ def generate_page(from_path, template_path, dest_path, debug=False):
         print(seperator)
         print("Final output")
         print(fileTemplate)
+
+    # 7. Write the new full HTML page to a file at dest_path. Be sure to create any necessary directories if they don't exist.
+    pathDest = Path(dest_path)
+    if not os.path.exists(dest_path.parent):
+        os.makedirs(pathDest.parent)
+
+    with open(dest_path, "w") as file:
+        file.write(fileTemplate)
