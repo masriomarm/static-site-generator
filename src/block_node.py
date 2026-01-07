@@ -93,21 +93,29 @@ class BlockNode:
 
 
 class BlockNodeParagraph(BlockNode):
-    def __init__(self, val):
-        super().__init__(val)
+    def __init__(self, val, debug):
+        super().__init__(val, debug)
+        if debug:
+            print("BlockNodeParagraph, init -> val =", val)
         self.textNodes = ut.text_to_textnodes(self.val)
+        if debug:
+            print("BlockNodeParagraph, text nodes -> self.textNodes =", self.textNodes)
         for node in self.textNodes:
             html_node = ut.text_node_to_html_node(node)
             leaf_node = hn.LeafNode(html_node.tag, html_node.value, html_node.props)
+            if debug:
+                print("BlockNodeParagraph, appending leaf node ->", leaf_node)
             self.children.append(leaf_node)
+        if debug:
+            print("BlockNodeParagraph, childerens ->", self.children)
 
     def to_html(self):
         return hn.ParentNode(self.tag, self.children).to_html()
 
 
 class BlockNodeQuote(BlockNode):
-    def __init__(self, val, debug=False):
-        super().__init__(val)
+    def __init__(self, val, debug):
+        super().__init__(val, debug)
         lines = self.val.split("\n")
         self.quote_val = ""
         if debug:
@@ -126,8 +134,8 @@ class BlockNodeQuote(BlockNode):
 
 
 class BlockNodeCode(BlockNode):
-    def __init__(self, val, debug=False):
-        super().__init__(val)
+    def __init__(self, val, debug):
+        super().__init__(val, debug)
         pattern = (r"^.*`{3}\n+(.*)`{3}$", re.MULTILINE | re.DOTALL)
         matches = re.search(pattern[0], self.val, pattern[1])
         self.code_val = matches.group(1).lstrip()
@@ -142,8 +150,8 @@ class BlockNodeCode(BlockNode):
 
 
 class BlockNodeHeading1(BlockNode):
-    def __init__(self, val, debug=False):
-        super().__init__(val)
+    def __init__(self, val, debug):
+        super().__init__(val, debug)
         pattern = (r"^#{1}\s(.*)", 0)
         matches = re.search(pattern[0], self.val, pattern[1])
         self.head_val = matches.group(1)
@@ -156,8 +164,8 @@ class BlockNodeHeading1(BlockNode):
 
 
 class BlockNodeHeading2(BlockNode):
-    def __init__(self, val, debug=False):
-        super().__init__(val)
+    def __init__(self, val, debug):
+        super().__init__(val, debug)
         pattern = (r"^#{2}\s(.*)", 0)
         matches = re.search(pattern[0], self.val, pattern[1])
         self.head_val = matches.group(1)
@@ -170,8 +178,8 @@ class BlockNodeHeading2(BlockNode):
 
 
 class BlockNodeHeading3(BlockNode):
-    def __init__(self, val, debug=False):
-        super().__init__(val)
+    def __init__(self, val, debug):
+        super().__init__(val, debug)
         pattern = (r"^#{3}\s(.*)", 0)
         matches = re.search(pattern[0], self.val, pattern[1])
         self.head_val = matches.group(1)
@@ -184,8 +192,8 @@ class BlockNodeHeading3(BlockNode):
 
 
 class BlockNodeHeading4(BlockNode):
-    def __init__(self, val, debug=False):
-        super().__init__(val)
+    def __init__(self, val, debug):
+        super().__init__(val, debug)
         pattern = (r"^#{4}\s(.*)", 0)
         matches = re.search(pattern[0], self.val, pattern[1])
         self.head_val = matches.group(1)
@@ -198,8 +206,8 @@ class BlockNodeHeading4(BlockNode):
 
 
 class BlockNodeHeading5(BlockNode):
-    def __init__(self, val, debug=False):
-        super().__init__(val)
+    def __init__(self, val, debug):
+        super().__init__(val, debug)
         pattern = (r"^#{5}\s(.*)", 0)
         matches = re.search(pattern[0], self.val, pattern[1])
         self.head_val = matches.group(1)
@@ -212,8 +220,8 @@ class BlockNodeHeading5(BlockNode):
 
 
 class BlockNodeHeading6(BlockNode):
-    def __init__(self, val, debug=False):
-        super().__init__(val)
+    def __init__(self, val, debug):
+        super().__init__(val, debug)
         pattern = (r"^#{6}\s(.*)", 0)
         matches = re.search(pattern[0], self.val, pattern[1])
         self.head_val = matches.group(1)
@@ -228,8 +236,8 @@ class BlockNodeHeading6(BlockNode):
 
 
 class BlockNodeListOrdered(BlockNode):
-    def __init__(self, val, debug=False):
-        super().__init__(val)
+    def __init__(self, val, debug):
+        super().__init__(val, debug)
         lines = self.val.split("\n")
         self.list_val = ""
         if debug:
@@ -250,8 +258,8 @@ class BlockNodeListOrdered(BlockNode):
 
 
 class BlockNodeListUnordered(BlockNode):
-    def __init__(self, val, debug=False):
-        super().__init__(val)
+    def __init__(self, val, debug):
+        super().__init__(val, debug)
         lines = self.val.split("\n")
         self.list_val = ""
         if debug:
@@ -286,11 +294,15 @@ block_type_map = {
 }
 
 
-def create_block_node(block_string) -> BlockNode:
+def create_block_node(block_string, debug) -> BlockNode:
     blockType = block_to_block_type(block_string)
+    if debug:
+        print("Creating block node of type ->", blockType)
     childClass = block_type_map.get(blockType)
+    if debug:
+        print("Child class ->", childClass)
     if childClass is None:
         raise NotImplementedError(
             f"Block node child class for BlockType {blockType} not found."
         )
-    return childClass(block_string)
+    return childClass(block_string, debug)

@@ -11,7 +11,7 @@ def extract_title(heading):
     If there is no h1 header, raise an exception.
     extract_title("# Hello") should return "Hello" (strip the # and any leading or trailing whitespace)
     """
-    h1 = bn.BlockNodeHeading1(heading)
+    h1 = bn.BlockNodeHeading1(heading, debug=False)
     if not h1.head_val:
         raise ValueError(f"Invalid heading <{heading}>")
     return h1.head_val.strip()

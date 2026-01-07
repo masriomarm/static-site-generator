@@ -26,7 +26,10 @@ def markdown_to_html_node(markdown, debug=False):
         pprint(blocks)
 
     for block in blocks:
-        blockNode = bn.create_block_node(block)
+        if debug:
+            print("====== Block node ======")
+            pprint(block)
+        blockNode = bn.create_block_node(block, debug)
         ret += blockNode.to_html()
 
     ret = hn.LeafNode("div", ret).to_html()
