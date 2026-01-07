@@ -1,7 +1,8 @@
 import os
 import shutil
-import src.block_node as bn
-import src.blocks as bk
+import sys
+import block_node as bn
+import blocks as bk
 from pathlib import Path
 import difflib
 

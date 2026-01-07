@@ -1,7 +1,7 @@
 import re
 from pprint import pprint
-import src.block_node as bn
-import src.htmlnode as hn
+import block_node as bn
+import htmlnode as hn
 
 
 def markdown_to_blocks(text):

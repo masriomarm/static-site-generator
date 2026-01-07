@@ -1,8 +1,8 @@
 from enum import Enum
 import re
-import src.blocks as bk
-import src.utils as ut
-import src.htmlnode as hn
+import blocks as bk
+import utils as ut
+import htmlnode as hn
 
 
 class BlockType(Enum):
