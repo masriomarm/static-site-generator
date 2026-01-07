@@ -12,7 +12,7 @@ Assignment
     - `glorfindel.png`
     - `tom.png`
     - `rivendell.png`
-- [ ] Run the generator to copy all the new stuff in static into the public directory.
+- [x] Run the generator to copy all the new stuff in static into the public directory.
 
 Run and submit the CLI tests from the root of the project.
 

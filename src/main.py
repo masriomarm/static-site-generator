@@ -19,5 +19,32 @@ def main():
     tmpPath = Path.joinpath(curDir.parent, "template.html")  # content path
     hu.generate_page(srcPath, tmpPath, trgPath)
 
+    srcPath = Path.joinpath(
+        curDir.parent, "content", "blog", "glorfindel", "index.md"
+    )  # source path
+    trgPath = Path.joinpath(
+        curDir.parent, "public", "blog", "glorfindel", "index.html"
+    )  # content path
+    tmpPath = Path.joinpath(curDir.parent, "template.html")  # content path
+    hu.generate_page(srcPath, tmpPath, trgPath)
+
+    srcPath = Path.joinpath(
+        curDir.parent, "content", "blog", "tom", "index.md"
+    )  # source path
+    trgPath = Path.joinpath(
+        curDir.parent, "public", "blog", "tom", "index.html"
+    )  # content path
+    tmpPath = Path.joinpath(curDir.parent, "template.html")  # content path
+    hu.generate_page(srcPath, tmpPath, trgPath)
+
+    srcPath = Path.joinpath(
+        curDir.parent, "content", "blog", "majesty", "index.md"
+    )  # source path
+    trgPath = Path.joinpath(
+        curDir.parent, "public", "blog", "majesty", "index.html"
+    )  # content path
+    tmpPath = Path.joinpath(curDir.parent, "template.html")  # content path
+    hu.generate_page(srcPath, tmpPath, trgPath)
+
 
 main()
