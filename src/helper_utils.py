@@ -52,7 +52,7 @@ def util_copy_tree(src, dst, debug=True):
     shutil.copytree(srcPath, dstPath, dirs_exist_ok=True)
 
 
-def generate_page(from_path, template_path, dest_path, debug=False):
+def generate_page(from_path, template_path, dest_path, basePath="/", debug=False):
     """
     Create a generate_page(from_path, template_path, dest_path) function. It should:
 
@@ -105,6 +105,8 @@ def generate_page(from_path, template_path, dest_path, debug=False):
         if debug:
             print("Replacing <", k, ">", "with <", v, ">")
         fileTemplate = fileTemplate.replace(k, v)
+    fileTemplate = fileTemplate.replace('href="/', f'href="{basePath}')
+    fileTemplate = fileTemplate.replace('src="/', f'src="{basePath}')
     if debug:
         print(seperator)
         print("Final output")
@@ -120,7 +122,7 @@ def generate_page(from_path, template_path, dest_path, debug=False):
 
 
 def generate_pages_recursive(
-    dir_path_content, template_path, dest_dir_path, debug=False
+    dir_path_content, template_path, dest_dir_path, basePath="/", debug=False
 ):
     """
     - [ ] Crawl every entry in the content directory
@@ -154,4 +156,4 @@ def generate_pages_recursive(
         dest_path = Path.from_uri(filesHTML[indx])
         if debug:
             print(f"Generating page from {from_path} to {dest_path} using {tmpPath}")
-        generate_page(from_path, tmpPath, dest_path, debug)
+        generate_page(from_path, tmpPath, dest_path, basePath, debug)
