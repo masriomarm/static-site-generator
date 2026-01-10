@@ -1,3 +1,47 @@
+# `CH5-L5`
+Deploy to the Internet
+
+We're so close! We have one last step: to publish our site to the world wide web. (Yes, on a public domain and server)
+GitHub Pages
+
+GitHub Pages is a free service from GitHub that allows you to host static websites directly from a GitHub repository. Conveniently, you now have a static site generator!
+
+That said, there are two limitations we're going to need to work around:
+
+1. GitHub pages serves repo sites from https://USERNAME.github.io/REPO_NAME/, which means that the "root" of our site will actually be at a subdirectory. We'll have to enhance our generator to handle that.
+2. GitHub Pages needs the code committed to Git (at least by default) to deploy the site. So we'll have to break our "don't commit the generated site" rule.
+
+Assignment
+
+- [x] Hopefully you've already been committing and pushing your code to GitHub. If not, do that now.
+- [x] Right now our site always assumes that / is the root path of the site (e.g. http://localhost:8888/. Make it configurable by:
+    - [x] In `main.py` use the `sys.argv` to grab the first CLI argument to the program. Save it as the `basepath`. If one isn't provided, default to /.
+    - [x] Pass the `basepath` to the generate_pages_recursive and generate_page functions.
+    - [x] In generate_page, after you replace the {{ Title }} and {{ Content }}, replace any instances of:
+        - [x] `href="/ with href="{basepath}`
+        - [x] `src="/ with src="{basepath}`
+- [x] Create a new build.sh script that builds the site for production:
+    - [x] The script is simple: `python3 src/main.py "/REPO_NAME/"` (replace REPO_NAME with your actual GitHub repo name)
+    - [x] Your `main.py` is also used for local testing, so it will still need the default / `baseurl`
+    - [x] Run the new build script and ensure that the site is built correctly
+- [x] Update your `main.py` to build the site into the docs directory instead of public. GitHub pages serves sites from the docs directory of your main branch by default.
+- [x] Delete the public directory, and remove it from your `.gitignore` file.
+- [x] Rebuild the site into the docs directory.
+- [ ] Open your repository's settings on GitHub and select Pages in the Code and automation section to config the publishing source.
+    - [ ] Set the source to the main branch and the docs directory.
+    - [ ] Save the settings.
+    - [ ] (Now the /docs directory on your main branch will auto deploy to your GitHub Pages URL once something is in it.)
+- [ ] Commit and push your changes to GitHub
+- [ ] Open the live URL (https://USERNAME.github.io/REPO_NAME/) in your browser and ensure that the site is live and working correctly. You can check the status and find the exact URL in the GitHub Pages section of your repository settings.
+
+Configure the Boot.dev CLI to use your new GitHub Pages URL for the tests:
+
+`bootdev config base_url https://USERNAME.github.io/REPO_NAME/`
+
+Run and submit the CLI tests from the root of the project.
+
+You can then reset the base URL: `bootdev config base_url --reset`
+
 # `CH5-L4`
 
 Generate Pages Recursively
