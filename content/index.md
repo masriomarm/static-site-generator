@@ -1,5 +1,8 @@
 # Tolkien Fan Club
 
+- [Project's GitHub](https://github.com/masriomarm/static-site-generator.git)
+- [Personal portfolio](https://masriomarm.github.io/)
+
 ![JRR Tolkien sitting](/images/tolkien.png)
 
 Here's the deal, **I like Tolkien**.
