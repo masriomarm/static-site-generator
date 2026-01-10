@@ -1,2 +1,2 @@
 #! /usr/bin/bash
-python3 src/main.py "/masriomarm.github.io/"
+python3 src/main.py "/static-site-generator/"
