@@ -10,7 +10,10 @@ def main():
     prjRoot = curDir.parent
 
     srcPath = Path.joinpath(prjRoot, "static")
-    trgPath = Path.joinpath(prjRoot, "public")
+    if len(sys.argv) == 2:
+        trgPath = Path.joinpath(prjRoot, "docs")
+    else:
+        trgPath = Path.joinpath(prjRoot, "public")
     try:
         shutil.rmtree(trgPath)
     except FileNotFoundError:
